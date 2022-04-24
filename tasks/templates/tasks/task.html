@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task</title>
+</head>
+<body>
+<h3>This is task field</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.title }}
+<button type="submit" value="submit">Create Task</button>
+</form>
+
+{% for task in task_list  %}
+{% if task.completed == True %}
+    <strike>{{ task }} <a href="{% url 'update_task' task.id%}">Update</a> <a href="{% url 'delete' task.id%}">Delete</a><br></strike>
+    {% else %}
+    {{ task }} <a href="{% url 'update_task' task.id%}">Update</a> <a href="{% url 'delete' task.id%}">Delete</a><br>
+{% endif %}
+{% endfor%}
+
+
+</body>
+</html>
